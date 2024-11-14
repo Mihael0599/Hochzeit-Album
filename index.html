@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/imgs/Bild1.png">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./Styles/fonts.css">
+    <link rel="stylesheet" href="./Styles/assets.css">
+    <script type="module" src="./template.js"></script>
+    <script type="module" src="./script.js"></script>
+    <script type="module" src="./template.js"></script>
+    <title>Mihael i Tena</title>
+</head>
+<body>
+    <div class="header">
+    <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+    <label for="openSidebarMenu" class="sidebarIconToggle">
+      <div class="spinner diagonal part-1"></div>
+      <div class="spinner horizontal"></div>
+      <div class="spinner diagonal part-2"></div>
+    </label>
+    <div id="sidebarMenu">
+      <ul class="sidebarMenuInner">
+        <li><a href="./pictures.html">Pogledaj slike</a></li>
+        <li><a href="./about.html">About</a></li>
+      </ul>
+    </div>
+</div>
+    <div class="hero">
+        <div class="name-datum">
+            <h1>Vjenčanje Tena i Mihael</h1>
+            <h2>13.06.2025</h2>
+        </div>
+        <div class="upload-photo-container">
+            <span>Ovjde možete svoje slike objaviti</span>
+            <label for="photo-upload" class="button-27">Objavi slike</label>
+            <input type="file" id="photo-upload" accept="image/*" style="display: none;">
+        </div>
+    </div>
+    <div class="album" id="gallery"></div>
+</body>
+</html>
