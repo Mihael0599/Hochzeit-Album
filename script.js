@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
-import { getStorage, ref, listAll,  getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js';
+import { getStorage, ref, uploadBytes,  getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBNbUwc139nWbAmfF7vrpz7MuxEOir_e20",
@@ -12,7 +12,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-const fileInput = document.getElementById('photo-upload');
+/* const fileInput = document.getElementById('photo-upload');
 
 if (fileInput) {
     fileInput.addEventListener('change', (event) => {
@@ -31,27 +31,44 @@ if (fileInput) {
                 console.error('Fehler beim Hochladen des Bildes:', error);
             });
     });
+} */
+
+async function uploadImage(){
+    const fileInput = document.getElementById("photo-upload");
+    const file = fileInput.files[0];
+
+    if (file) {
+        const storageRef = ref(storage, `uploaded_images/${file.name}`); 
+        await uploadBytes(storageRef, file);
+
+        const imageURL = await getDownloadURL(storageRef);
+        const imagePreview = document.getElementById("imagePreview");
+        imagePreview.src = imageURL;
+    }
 }
 
-async function getPictures() {
-    const imagesRef = ref(storage, 'images/');
-    const result = await listAll(imagesRef);
-    const imagesData = [];
+const uploadButton = document.getElementById("uploadImage");
+uploadButton.addEventListener('click', uploadImage);
 
-    for (const item of result.items) {
-        const downloadURL = await getDownloadURL(item);
-        imagesData.push({ name: item.name, url: downloadURL });
-    }
 
-    return imagesData;
-}
+/* const Teststorage = getStorage();
+getDownloadURL(ref(storage, 'images/Screenshot 2024-09-03 203447.png'))
+  .then((url) => {
+    // `url` is the download URL for 'images/stars.jpg'
 
-// Holen und Anzeigen der Bilder in pictures.html
-document.addEventListener('DOMContentLoaded', () => {
-    if (document.getElementById('gallery')) {
-        getPictures().then(imagesData => {
-            const galleryContainer = document.getElementById('gallery');
-            galleryContainer.innerHTML = getPicturesTemplate(imagesData);
-        });
-    }
-});
+    // This can be downloaded directly:
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+    };
+    xhr.open('GET', url);
+    xhr.send();
+
+    // Or inserted into an <img> element
+    const img = document.getElementById('myimg');
+    img.setAttribute('src', url);
+  })
+  .catch((error) => {
+    // Handle any errors
+  }); */
