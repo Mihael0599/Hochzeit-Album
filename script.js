@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
-import { getStorage, ref, uploadBytes,  getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js';
+import { getStorage, ref, uploadBytes, listAll,  getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBNbUwc139nWbAmfF7vrpz7MuxEOir_e20",
@@ -12,26 +12,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-/* const fileInput = document.getElementById('photo-upload');
-
-if (fileInput) {
-    fileInput.addEventListener('change', (event) => {
-        const file = event.target.files[0];
-        const storageRef = ref(storage, `images/${file.name}`);
-
-        uploadBytes(storageRef, file)
-            .then((snapshot) => {
-                console.log('Hochgeladenes Bild:', snapshot);
-                return getDownloadURL(snapshot.ref);
-            })
-            .then((downloadURL) => {
-                console.log('Bild-URL:', downloadURL);
-            })
-            .catch((error) => {
-                console.error('Fehler beim Hochladen des Bildes:', error);
-            });
-    });
-} */
+const folderRef = ref(storage, 'uploaded_images');
 
 async function uploadImage(){
     const fileInput = document.getElementById("photo-upload");
@@ -47,28 +28,21 @@ async function uploadImage(){
     }
 }
 
-const uploadButton = document.getElementById("uploadImage");
-uploadButton.addEventListener('click', uploadImage);
+const uploadButton = document.getElementById("photo-upload");
+uploadButton.addEventListener('change', uploadImage);
 
 
-/* const Teststorage = getStorage();
-getDownloadURL(ref(storage, 'images/Screenshot 2024-09-03 203447.png'))
-  .then((url) => {
-    // `url` is the download URL for 'images/stars.jpg'
-
-    // This can be downloaded directly:
-    const xhr = new XMLHttpRequest();
-    xhr.responseType = 'blob';
-    xhr.onload = (event) => {
-      const blob = xhr.response;
-    };
-    xhr.open('GET', url);
-    xhr.send();
-
-    // Or inserted into an <img> element
-    const img = document.getElementById('myimg');
-    img.setAttribute('src', url);
-  })
-  .catch((error) => {
-    // Handle any errors
-  }); */
+async function listFiles() {
+    try {
+      const result = await listAll(folderRef);
+      result.items.forEach(async (itemRef) => {
+        const fileUrl = await getDownloadURL(itemRef);
+        console.log("Datei:", itemRef.name, "URL:", fileUrl);
+      });
+    } catch (error) {
+      console.error("Fehler beim Abrufen der Dateien:", error);
+    }
+  }
+  
+  // Funktion aufrufen
+  listFiles();
