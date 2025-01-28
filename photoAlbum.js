@@ -1,7 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
 import { getStorage, ref, listAll, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js';
 
-// Firebase Konfiguration
 const firebaseConfig = {
     apiKey: "AIzaSyBNbUwc139nWbAmfF7vrpz7MuxEOir_e20",
     authDomain: "test-7a89c.firebaseapp.com",
@@ -11,32 +10,35 @@ const firebaseConfig = {
     appId: "1:531508064224:web:f28da52be04d97748d4585"
 };
 
-// Firebase initialisieren
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 const folderRef = ref(storage, 'uploaded_images');
 
+let timeOut;
 
-// Alle Bilder abrufen und anzeigen
-async function fetchAndDisplayImages() {
+
+function loadPage() {
+    document.getElementById("loader").style.display = "flex";
+    timeOut = setTimeout(showPage, 2000);
+}
+
+function showPage() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("hero").style.display = "flex";
+}
+
+function renderImages() {
     const galleryContainer = document.getElementById("hero");
+    const pictures = JSON.parse(localStorage.getItem('pictures'));
+    loadPage(); 
 
-    try {
-        const result = await listAll(folderRef);
-        const imageUrls = await Promise.all(result.items.map(item => getDownloadURL(item)));
-
-        if (imageUrls.length > 0) {
-            imageUrls.forEach(url => {
-                galleryContainer.innerHTML += getImgTemplate(url); // Nutze die template-Funktion
-            });
-        } else {
-            galleryContainer.innerText = "Keine Bilder verfügbar.";
-        }
-    } catch (error) {
-        console.error("Fehler beim Abrufen der Bilder:", error);
-        galleryContainer.innerText = "Fehler beim Laden der Bilder.";
+    if (pictures && pictures.length > 0) {
+        galleryContainer.innerHTML = pictures
+            .map((url, index) => getImgTemplate(url, index)) 
+            .join('');
+    } else {
+        galleryContainer.innerText = "Keine Bilder verfügbar.";
     }
 }
 
-// Initiale Bilder laden
-fetchAndDisplayImages();
+document.addEventListener("DOMContentLoaded", renderImages);

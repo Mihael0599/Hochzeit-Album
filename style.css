@@ -191,10 +191,63 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
 
 .hero-pictures{
     padding-top: 120px;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 30px;
     padding-bottom: 120px;
 }
+
+.msg-box{
+    background-color: black;
+    color: white;
+    width: 280px;
+    height: 50px;
+    border-radius: 40px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    animation: overlaySlideIn 0.5s linear forwards;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+@keyframes overlaySlideIn {
+    0% {
+      top: 100%;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+  
+    100% {
+      top: 43%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid black;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 
+    
