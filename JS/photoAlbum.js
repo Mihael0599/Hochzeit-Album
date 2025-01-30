@@ -14,8 +14,6 @@ const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 const folderRef = ref(storage, 'uploaded_images');
 
-let timeOut;
-
 
 function loadPage() {
     document.getElementById("loader").style.display = "flex";

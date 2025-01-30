@@ -7,9 +7,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="/imgs/Bild1.png" />
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./Styles/fonts.css" />
-    <link rel="stylesheet" href="./Styles/assets.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../Styles/fonts.css" />
+    <link rel="stylesheet" href="../Styles/assets.css" />
     <link type="module" rel="stylesheet" href="/script.js">
     <title>Mihael i Tena</title>
   </head>
@@ -23,15 +23,35 @@
     </label>
     <div id="sidebarMenu">
       <ul class="sidebarMenuInner">
-        <li><a href="./index.html">Nazad na početnu stranicu</a></li>
-        <li><a href="./about.html">About</a></li>
+        <li><a href="../index.html">Nazad na početnu stranicu</a></li>
+        <li><a href="./pictures.html">About</a></li>
       </ul>
     </div>
     <div class="hero-pictures" id="hero">
   </div>
-    <div class="overlay" id="overlay"></div>
+  <div class="backgorund-overlay">
+    <div class="overlay" id="overlay">
+      <div class="close-container">
+      <div>
+      <button class="close-btn"><img class="close-btn-img" src="../imgs/close-150192_640.png" alt=""></button>
+    </div>
+  </div>
+      <div class="image-and-buttons">
+      <img class="overlay-img" src="../imgs/church.jpg" alt="">
+    <div class="arrows">
+      <div class="arrow-right">
+        <button><img class="arrow-right" src="../imgs/arrow-40166_640.png" alt=""></button>
+      </div>
+      <div class="arrow-left">
+        <button><img class="arrow-left" src="../imgs/arrow-40166_640.png" alt=""></button>
+      </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
     <div class="loader" id="loader"></div>
-    <script type="module" src="./photoAlbum.js"></script>
-    <script src="./template.js"></script>
+    <script type="module" src="../JS/photoAlbum.js"></script>
+    <script src="../JS/template.js"></script>
   </body>
 </html>
